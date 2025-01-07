@@ -1,0 +1,38 @@
+{# {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }} #}
+
+{# templates/product/_form.html.twig #}
+<div class="container">
+    {{ form_start(form) }}
+
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_row(form.photo) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.category) }}
+            {{ form_row(form.price) }}
+            {{ form_row(form.stock) }}
+        </div>
+        <div class="col-md-6 border-start">
+            {{ form_row(form.brand) }}
+            {{ form_row(form.size) }}
+            {{ form_row(form.color) }}
+            <div class="form-group">
+                {{ form_label(form.description) }}
+                {{ form_widget(form.description, {'attr': {'rows': '5', 'class': 'form-control'}}) }}
+                {{ form_errors(form.description) }}
+            </div>
+            {# {{ form_row(form.created_at) }}
+            {{ form_row(form.updated_at) }} #}
+        </div>
+    </div>
+
+    <div class="d-grid mt-3">
+        <button class="btn btn-primary btn-block">Save</button>
+    </div>
+
+    {{ form_end(form) }}
+</div>
+

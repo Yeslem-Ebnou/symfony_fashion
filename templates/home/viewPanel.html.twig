@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Your Panel{% endblock %}
+
+{% block body %}
+<div class="container px-5">
+    {% for message in app.flashes('success') %} 
+        <div class="alert alert-success"> {{ message }} </div> 
+    {% endfor %}
+    <button class="btn position-relative">
+        <span class="h1">Panel</span> 
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ countPanels }}</span>
+    </button>
+    <table class="table table-sm table-hover">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                {# <th scope="col">Status</th> #}  {# pending / confirmed / delivred #}
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for panel in panels %}
+            <tr>
+                <td>
+                    <img 
+                        class="" 
+                        style="width: 100px; height: 100px;" 
+                        src="{{ asset('uploads/images/' ~ panel.getProduct.image) }}" 
+                        alt="{{ panel.getProduct.name }}"
+                    >
+                </td>
+                <td>{{ panel.getProduct.name }}</td>
+                <td>{{ panel.getProduct.price }} dt</td>
+                {# <td>{{ panel.status }}</td> #}
+                <td>
+                    {{ include('home/_delete_panel_form.html.twig') }}
+                </td>
+            </tr>
+            {% endfor %}
+            <tr class="">
+                <th colspan=2>Total:</th>
+                <td colspan=2> <strong>{{ sumPrices }} dinar</strong></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

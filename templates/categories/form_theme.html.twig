@@ -1,0 +1,26 @@
+{# templates/form_theme.html.twig #}
+{% block form_row %}
+    <div class="form-group mb-3">
+        {{ form_label(form) }}
+        <div class="col-md-10">
+            {{ form_errors(form) }}
+            {{ form_widget(form, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block button_row %}
+    <div class="form-group mb-3">
+        <div class="col-md-10 col-md-offset-2">
+            {{ form_widget(form, {'attr': {'class': 'btn btn-primary'}}) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block form_errors %}
+    {% if errors|length > 0 %}
+        <div class="alert alert-danger">
+            {{ form_errors(form) }}
+        </div>
+    {% endif %}
+{% endblock %}

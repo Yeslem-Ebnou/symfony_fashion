@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Products{% endblock %}
+
+{% block body %}
+<div class="container">
+    {% for message in app.flashes('success') %} 
+        <div class="alert alert-success"> {{ message }} </div> 
+    {% endfor %}
+    <h1>Products</h1>
+
+    <div class="row">
+        {% for product in products %}
+            <div class="col-sm-4 col-md-3 col-lg-2 mb-4">
+                <div class="card h-100 p-3">
+                    <img class="card-img-top" style="width: 150px; height: 150px;" src="{{ asset('uploads/images/' ~ product.image) }}" alt="{{ product.name }}">
+                    <div class="card-body">
+                        <h6 class="card-title">{{ product.name }}</h6>
+                        <div class="d-flex flex-column">
+                            <small class="card-text"><strong>Price:</strong> {{ product.price }}</small>
+                            <small class="card-text"><strong>Stock:</strong> {{ product.stock }}</small>
+                            <small class="card-text"><strong>Brand:</strong> {{ product.brand }}</small>
+                            <small class="card-text"><strong>Size: </strong> {{ product.size }}</small>
+                            <small class="card-text"><strong>Color:</strong> {{ product.color }}</small>
+                            <small class="card-text">{{ product.description|slice(0, 100) ~ '...' }}</small>
+                        </div>
+                        
+                        {% if app.user %}
+                            {{ include("home/addToPanel.html.twig") }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12">
+                <small class="text-center">No records found</small>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}
