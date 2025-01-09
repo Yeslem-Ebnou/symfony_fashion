@@ -24,6 +24,9 @@ class Panel
     #[ORM\Column(length: 20)]
     private ?string $status = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $order_id = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +64,18 @@ class Panel
     public function setStatus(string $status): static
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getOrderId(): ?int
+    {
+        return $this->order_id;
+    }
+
+    public function setOrderId(?int $order_id): static
+    {
+        $this->order_id = $order_id;
 
         return $this;
     }
