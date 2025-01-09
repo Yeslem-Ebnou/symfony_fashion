@@ -3,9 +3,16 @@
 {% block title %}Order index{% endblock %}
 
 {% block body %}
-    <h1>Order index</h1>
+<div class="container">
+    {% for message in app.flashes('success') %} 
+        <div class="alert alert-success"> {{ message }} </div> 
+    {% endfor %} 
+    {% for message in app.flashes('danger') %} 
+        <div class="alert alert-danger"> {{ message }} </div> 
+    {% endfor %}
+    <h1>Orders</h1>
 
-    <table class="table">
+    <table class="table table-sm table-hover">
         <thead>
             <tr>
                 <th>Id</th>
@@ -14,23 +21,26 @@
                 <th>Ville</th>
                 <th>Code_postal</th>
                 <th>Created_at</th>
-                <th>Updated_at</th>
+                <th>status</th>
+                <th>Prices</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for order in orders %}
             <tr>
-                <td>{{ order.id }}</td>
-                <td>{{ order.phone }}</td>
-                <td>{{ order.address }}</td>
-                <td>{{ order.ville }}</td>
-                <td>{{ order.codePostal }}</td>
-                <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ order.updatedAt ? order.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td class="text-secondary">#{{ order.id }}</td>
+                <td class="text-secondary">{{ order.phone }}</td>
+                <td class="text-secondary">{{ order.address }}</td>
+                <td class="text-secondary">{{ order.ville }}</td>
+                <td class="text-secondary">{{ order.codePostal }}</td>
+                <td class="fs-6 fst-italic">{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td class="table-info fst-italic">{{ order.status }}</td>
+                <td class="text-primary table-secondary"> {{ order.total }} dt</td>
                 <td>
-                    <a href="{{ path('app_order_show', {'id': order.id}) }}">show</a>
-                    <a href="{{ path('app_order_edit', {'id': order.id}) }}">edit</a>
+                    <a href="{{ path('app_order_show', {'id': order.id}) }}" class="btn btn-primary btn-sm" >show</a>
+                    <a href="{{ path('app_order_edit', {'id': order.id}) }}" class="btn btn-warning btn-sm" >edit</a>
+                    {{ include("order/_delivred_form.html.twig") }}
                 </td>
             </tr>
         {% else %}
@@ -40,6 +50,6 @@
         {% endfor %}
         </tbody>
     </table>
+</div>
 
-    <a href="{{ path('app_order_new') }}">Create new</a>
 {% endblock %}

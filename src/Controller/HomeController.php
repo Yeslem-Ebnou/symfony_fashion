@@ -53,7 +53,7 @@ class HomeController extends AbstractController
         $total = 0;
         $sumPrices=0;
         $user = $this->getUser(); 
-        $panels = $entityManager->getRepository(Panel::class)->findBy(['user' => $user]); 
+        $panels = $entityManager->getRepository(Panel::class)->findBy(['user' => $user, 'status' => 'pending']); 
         $total = count($panels);
         foreach ($panels as $panel)
             $sumPrices+=$panel->getProduct()->getPrice();
@@ -69,7 +69,7 @@ class HomeController extends AbstractController
     public function getTotal(EntityManagerInterface $entityManager): Response {
         $total = 0;
         if ($user = $this->getUser()){
-            $panels = $entityManager->getRepository(Panel::class)->findby(['user'=> $user]);
+            $panels = $entityManager->getRepository(Panel::class)->findby(['user'=> $user, 'status' => 'pending']);
             $total = count($panels);
         }
         return $this->json(['total'=>$total]);

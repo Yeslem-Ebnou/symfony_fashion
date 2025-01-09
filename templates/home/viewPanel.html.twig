@@ -11,13 +11,16 @@
         <span class="h1">Panel</span> 
         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ countPanels }}</span>
     </button>
+    {% if countPanels > 0 %}
+        <a href="{{path('app_order_new')}}" class="btn btn-outline-primary float-end">Confirm</a> 
+    {% endif %}
     <table class="table table-sm table-hover">
         <thead>
             <tr>
                 <th scope="col"></th>
                 <th scope="col">Name</th>
                 <th scope="col">Price</th>
-                {# <th scope="col">Status</th> #}  {# pending / confirmed / delivred #}
+                <th scope="col">Status</th>  {# pending / confirmed / delivred #}
                 <th></th>
             </tr>
         </thead>
@@ -34,7 +37,7 @@
                 </td>
                 <td>{{ panel.getProduct.name }}</td>
                 <td>{{ panel.getProduct.price }} dt</td>
-                {# <td>{{ panel.status }}</td> #}
+                <td>{{ panel.status }}</td>
                 <td>
                     {{ include('home/_delete_panel_form.html.twig') }}
                 </td>

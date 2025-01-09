@@ -32,6 +32,23 @@ class Order
     #[ORM\Column]
     private ?\DateTimeImmutable $updated_at = null;
 
+    #[ORM\Column]
+    private ?float $total = null;
+
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private $user;
+
+    public function getUser(): ?User{
+        return $this->user;
+    }
+    public function setUser(User $user): self {
+        $this->user = $user;
+        return $this;
+    }
+
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +122,18 @@ class Order
     public function setUpdatedAt(\DateTimeImmutable $updated_at): static
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getTotal(): ?float
+    {
+        return $this->total;
+    }
+
+    public function setTotal(float $total): static
+    {
+        $this->total = $total;
 
         return $this;
     }

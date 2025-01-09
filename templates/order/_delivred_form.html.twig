@@ -1,0 +1,4 @@
+<form class="float-end" method="post" action="{{ path('app_order_delivered', {'id': order.id}) }}" onsubmit="return confirm('Are you sure is delivered?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delivered' ~ order.id) }}">
+    <button class="btn btn-outline-info btn-sm">Delivered</button>
+</form>
